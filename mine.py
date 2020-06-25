@@ -53,7 +53,7 @@ font = ImageFont.load_default()
 def write(hum, temp, pres, light):
 	draw.text((x, top),       "Humidity: " + str(round(hum,2)) + "%",  font=font, fill=255)
 	draw.text((x, top+8),     "Temperature: " + str(round(temp,2)) + " ^C", font=font, fill=255)
-	draw.text((x, top+16),    "Pressure: " + str(round(pres,2)) + " hPa",  font=font, fill=255)
+	draw.text((x, top+16),    "Pressure: " + str(round(pres/100,2)) + " hPa",  font=font, fill=255)
 	draw.text((x, top+25),    "Light Level: " + str(round(light,2)) + " lux",  font=font, fill=255)
 
     # Display image.
