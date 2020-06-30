@@ -1,0 +1,20 @@
+cd
+cd IoTUM
+mkdir oled
+cd oled
+sudo apt install -y git
+git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git
+cd Adafruit_Python_SSD1306
+sudo python3 setup.py install
+sudo python setup.py install
+cd ..
+cp -r Adafruit_Python_SSD1306/. ../measure
+cd ../measure
+wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/mine.py
+wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/display_measure.py
+wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/before_measure.py
+wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/bh1750.py
+wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/measure_v2.py
+#sed -i '11iimport mine' measure.py	#Ändere measure.py wenn es bei dir anders heisst.
+sudo rm -r ../oled
+
