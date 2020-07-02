@@ -6,7 +6,7 @@ import bh1750
 import datetime
 from time import sleep
 import Adafruit_DHT as dht
-#import mine
+import mine
 import RPi.GPIO as GPIO
 import subprocess
 import grove_uv_sensor as uv
@@ -63,6 +63,8 @@ def main():
     		print('Temp={0:0.1f}*C \nHumidity={1:0.1f}%\n\n'.format(t,h))
     		print("Light Level : " + format(lightLevel,'.2f') + " lx")
 		print("UV Value: {0}".format(round(uv_value,2)))
+#		mine.write(h, temp, pressure, lightLevel)
+
 
     #		f.write("Date: {}, Temperature: {}, Humidity: {}, Light: {}".format(now.strftime("%Y-%m-%d %H:%M:%S"),t, h, lightLevel))
 
