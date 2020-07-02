@@ -1,0 +1,15 @@
+cd
+cd IoTUM
+mkdir uv
+cd uv
+git clone https://github.com/Seeed-Studio/grove.py
+curl -sL https://github.com/Seeed-Studio/grove.py/raw/master/install.sh | sudo bash -s -
+cd
+cd IoTUM/measure
+wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/grove_uv_sensor.py
+sed -i '11iimport grove_uv_sensor' measure_v2.py
+sed -i '73i		uv_value = uv.veml6070_sensor.getUVIntensity()' measure_v2.py
+sed -i '81i		print("UV Value: {0}".format(round(uv_value,2))' measure_v2.py
+sed -i '91i		client.publish("pooz/uv_value",str(round(uv_value,2)))' measure_v2.py
+sed -i '70i		uv_value = uv.veml6070_sensor.getUVIntensity()' before_measure.py
+sed -i '78i		print("UV Value: {0}".format(uv.veml6070_sensor.getUVIntensity()))' before_measure.py
