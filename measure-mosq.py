@@ -22,7 +22,7 @@ GPIO.setup(channel_fire, GPIO.IN)
 
 def callback(channel):
 	global temp
-        if int(temp) > 28:
+        if int(temp) > 30:
                 print('flame detected')
 		subprocess.call(['mosquitto_pub', '-t', 'pooz/fireflag', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "1"])
 
@@ -77,7 +77,7 @@ def main():
 		#subprocess.call(['mosquitto_pub', '-t', 'pooz/fireflag', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "0"])
 
     		
-    		sleep(5)
+    		sleep(300)
 
 
     except KeyboardInterrupt:
