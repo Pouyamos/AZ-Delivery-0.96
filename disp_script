@@ -13,7 +13,6 @@ cd ../measure
 wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/mine.py
 wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/display_measure.py
 wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/before_measure.py
-wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/bh1750.py
 wget https://raw.githubusercontent.com/Pouyamos/AZ-Delivery-0.96/master/measure_v2.py
 #sed -i '11iimport mine' measure.py	#Ändere measure.py wenn es bei dir anders heisst.
 sudo rm -r ../oled
