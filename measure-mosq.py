@@ -24,7 +24,7 @@ def callback(channel):
 	global temp
         if int(temp) > 28:
                 print('flame detected')
-		subprocess.call(['mosquitto_pub', '-t', 'ruem/fireflag', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "1"])
+		subprocess.call(['mosquitto_pub', '-t', 'pooz/fireflag', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "1"])
 
 GPIO.add_event_detect(channel_fire ,GPIO.RISING,bouncetime=300)
 GPIO.add_event_callback(channel_fire ,callback)
@@ -39,13 +39,13 @@ def main():
     try:
 
     	global temp
-    	subprocess.call(['mosquitto_pub', '-t', 'ruem/measuring', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "1"])
+    	subprocess.call(['mosquitto_pub', '-t', 'pooz/measuring', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "1"])
 
 	while True:
 
 		if GPIO.input(18) == False:
 
-			subprocess.call(['mosquitto_pub', '-t', 'ruem/fireflag', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "0"])
+			subprocess.call(['mosquitto_pub', '-t', 'pooz/fireflag', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "0"])
 
     		bmp = BMP085(0x77)
     		temp = bmp.readTemperature()
@@ -66,29 +66,22 @@ def main():
 
     #		f.write("Date: {}, Temperature: {}, Humidity: {}, Light: {}".format(now.strftime("%Y-%m-%d %H:%M:%S"),t, h, lightLevel))
 
-    		print("Publishing message to topic","ruem/")
+    		print("Publishing message to topic","pooz/")
     		
-    		subprocess.call(['mosquitto_pub', '-t', 'ruem/temperature', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(temp, 2))])
-		subprocess.call(['mosquitto_pub', '-t', 'ruem/humidity', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(h,2))])
-		subprocess.call(['mosquitto_pub', '-t', 'ruem/pressure', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(pressure,2))])
-		subprocess.call(['mosquitto_pub', '-t', 'ruem/lightlevel', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(lightLevel,2))])
-		subprocess.call(['mosquitto_pub', '-t', 'ruem/uv_value', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(uv_value,2))])
+    		subprocess.call(['mosquitto_pub', '-t', 'pooz/temperature', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(temp, 2))])
+		subprocess.call(['mosquitto_pub', '-t', 'pooz/humidity', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(h,2))])
+		subprocess.call(['mosquitto_pub', '-t', 'pooz/pressure', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(pressure,2))])
+		subprocess.call(['mosquitto_pub', '-t', 'pooz/lightlevel', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(lightLevel,2))])
+		subprocess.call(['mosquitto_pub', '-t', 'pooz/uv_value', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', str(round(uv_value,2))])
 
-		#subprocess.call(['mosquitto_pub', '-t', 'ruem/fireflag', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "0"])
+		#subprocess.call(['mosquitto_pub', '-t', 'pooz/fireflag', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "0"])
 
     		
-    		"""
-    		client.publish("pooz/temperature",str(round(temp,2)))
-    		client.publish("pooz/humidity",str(round(h,2)))
-    		client.publish("pooz/pressure",str(round(pressure,2)))
-    		client.publish("pooz/lightlevel",str(round(lightLevel,2)))
-		client.publish("pooz/fireflag","0")
-		"""
-    		sleep(3)
+    		sleep(5)
 
 
     except KeyboardInterrupt:
-    	subprocess.call(['mosquitto_pub', '-t', 'ruem/measuring', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "0"])
+    	subprocess.call(['mosquitto_pub', '-t', 'pooz/measuring', '-h', 'adveisorgroup2.lsr.ei.tum.de', '-m', "0"])
 	print("Ended")
     	client.loop_stop() #stop the loop
 	GPIO.cleanup()
